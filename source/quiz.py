@@ -41,9 +41,9 @@ def quiz():
         },
     ]
 
-    # Store user answers in session state to persist across reruns
+    # Initialize session state for user answers if not already done
     if 'user_answers' not in st.session_state:
-        st.session_state.user_answers = {}
+        st.session_state.user_answers = {i: None for i in range(len(questions))}
 
     if 'all_answered' not in st.session_state:
         st.session_state.all_answered = False
@@ -52,7 +52,7 @@ def quiz():
     def check_all_answered():
         st.session_state.all_answered = all(answer is not None for answer in st.session_state.user_answers.values())
 
-    # Display each question in a card-like layout
+    # Display each question
     for idx, q in enumerate(questions):
         with st.container():
             st.markdown(
@@ -65,11 +65,11 @@ def quiz():
                 unsafe_allow_html=True,
             )
 
-            # Radio buttons for answers, preserving state with session_state
+            # Radio buttons for answers, keeping user's answers persistent
             selected_answer = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
                 options=q["options"],
-                index=q["options"].index(st.session_state.user_answers.get(idx, None)) if idx in st.session_state.user_answers else None,
+                index=q["options"].index(st.session_state.user_answers.get(idx)) if st.session_state.user_answers.get(idx) else None,
                 key=f"pertanyaan_{idx}",
                 on_change=check_all_answered,
             )
@@ -87,7 +87,7 @@ def quiz():
             for idx, q in enumerate(questions)
         )
 
-        # Tampilkan hasil
+        # Show the result
         st.markdown(
             f"""
             <div style='background-color: #C6E7FF; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid #AED4FF;'>
@@ -99,7 +99,7 @@ def quiz():
         )
         st.markdown("\n")
         
-        # Umpan balik berdasarkan skor
+        # Feedback based on score
         if score == len(questions):
             st.success("Luar biasa! kamu menjawab semua pertanyaan dengan benar! 🌟🎉")
         elif score >= len(questions) / 2:
