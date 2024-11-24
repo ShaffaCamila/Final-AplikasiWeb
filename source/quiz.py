@@ -65,7 +65,7 @@ def quiz():
 
             # Add image below Question 1
             if idx == 0:
-                st.image("./source/gambar-soal.jpg", caption="Ilustrasi untuk pertanyaan 1", use_column_width=True)
+                st.image("./source/gambar-soal.jpg", caption="Ilustrasi untuk pertanyaan 1", width=300)
 
             # Get saved answer if exists, otherwise set to None
             default_answer = st.session_state.user_answers.get(idx, None)
