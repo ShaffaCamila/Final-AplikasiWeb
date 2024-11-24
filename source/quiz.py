@@ -41,20 +41,13 @@ def quiz():
         },
     ]
 
-    # Initialize session state for user answers if not already done
-    if 'user_answers' not in st.session_state:
-        st.session_state.user_answers = {i: None for i in range(len(questions))}
+    # Initialize answers dictionary
+    user_answers = {i: None for i in range(len(questions))}
 
-    if 'all_answered' not in st.session_state:
-        st.session_state.all_answered = False
-
-    # Function to check if all questions are answered
-    def check_all_answered():
-        st.session_state.all_answered = all(answer is not None for answer in st.session_state.user_answers.values())
-
-    # Display each question
-    for idx, q in enumerate(questions):
-        with st.container():
+    # Form for the quiz
+    with st.form(key='quiz_form'):
+        # Display each question in a form
+        for idx, q in enumerate(questions):
             st.markdown(
                 f"""
                 <div style="background-color: #D1E9F6; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #AED4FF;">
@@ -65,25 +58,24 @@ def quiz():
                 unsafe_allow_html=True,
             )
 
-            # Radio buttons for answers, keeping user's answers persistent
+            # Radio buttons for answers
             selected_answer = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
                 options=q["options"],
-                index=q["options"].index(st.session_state.user_answers.get(idx)) if st.session_state.user_answers.get(idx) else None,
+                index=q["options"].index(user_answers.get(idx)) if user_answers.get(idx) else None,
                 key=f"pertanyaan_{idx}",
-                on_change=check_all_answered,
             )
 
-            # Save the selected answer in session state
-            st.session_state.user_answers[idx] = selected_answer
+            # Save the selected answer
+            user_answers[idx] = selected_answer
 
-    # Disable the submit button until all questions are answered
-    submit_button = st.button("Submit", disabled=not st.session_state.all_answered)
+        # Submit button
+        submit_button = st.form_submit_button("Submit")
 
     if submit_button:
         # Calculate score
         score = sum(
-            st.session_state.user_answers[idx] == q["answer"]
+            user_answers[idx] == q["answer"]
             for idx, q in enumerate(questions)
         )
 
