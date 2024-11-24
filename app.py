@@ -5,7 +5,7 @@ import plotly.express as px
 from source.home import home
 from source.classification import show_animal_dashboard
 from source.quiz import quiz
-from source.about import tentang
+from source.about import about
 
 st.set_page_config(
     page_title="Binatopedia Animal Classification",
@@ -75,7 +75,7 @@ def main():
     elif selected == 'Quiz':
         quiz()
     elif selected == 'About':
-        tentang()
+        about()
 
 if __name__ == "__main__":
     main()

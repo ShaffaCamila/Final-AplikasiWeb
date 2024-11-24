@@ -1,6 +1,6 @@
 import streamlit as st
 
-def tentang():
+def about():
     """
     Fungsi untuk menampilkan halaman 'Tentang' dengan informasi latar belakang,
     tujuan, cara kerja, dan pembuat aplikasi.
