@@ -38,24 +38,72 @@ def quiz():
         },
     ]
 
-    # Initialize score
-    score = 0
+    # Header
+    st.markdown(
+        """
+        <div style='background-color: #F0F8FF; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #ADD8E6;'>
+            <h3 style='text-align: center;'>🎉 Quiz Time! 🎉</h3>
+            <p style='text-align: center;'>Uji kemampuan kamu!</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    # Loop through questions
-    for idx, q in enumerate(questions):
-        st.subheader(f"Question {idx + 1}")
-        user_answer = st.radio(q["question"], q["options"], key=f"q{idx}")
+    # Form for the quiz
+    with st.form(key="quiz_form"):
+        # Display each question in a form
+        for idx, q in enumerate(questions):
+            st.markdown(
+                f"""
+                <div style="background-color: #D1E9F6; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #AED4FF;">
+                    <h4>Question {idx + 1}</h4>
+                    <p>{q['question']}</p>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
-        # Check answer and update score
-        if user_answer == q["answer"]:
-            score += 1
+            # Get saved answer if exists, otherwise use the first option as default
+            default_answer = st.session_state.user_answers.get(idx, q["options"][0])
 
-    # Submit button to calculate final score
-    if st.button("Submit Quiz"):
-        st.write(f"Your final score is: {score}/{len(questions)}")
+            # Radio buttons for answers
+            selected_answer = st.radio(
+                f"Pilih jawaban untuk Pertanyaan {idx + 1}",
+                options=q["options"],
+                index=q["options"].index(default_answer),
+                key=f"radio_{idx}",
+            )
+
+            # Save the selected answer in session state
+            st.session_state.user_answers[idx] = selected_answer
+
+        # Submit button
+        submit_button = st.form_submit_button("Submit")
+
+        # Check if the form is submitted
+        if submit_button:
+            st.session_state.quiz_submitted = True
+
+    # After form submission, calculate and display the score
+    if st.session_state.quiz_submitted:
+        score = sum(
+            st.session_state.user_answers[idx] == q["answer"]
+            for idx, q in enumerate(questions)
+        )
+
+        st.markdown(
+            f"""
+            <div style='background-color: #C6E7FF; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid #AED4FF;'>
+                <h2 style='text-align: center;'>Hasil kuis</h2>
+                <p style='text-align: center; font-size: 20px;'>🎉 Kamu mendapatkan skor <strong>{score}</strong> dari <strong>{len(questions)}</strong>.</p>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
         if score == len(questions):
-            st.success("Excellent! You got all questions correct! 🎉")
-        elif score > len(questions) // 2:
-            st.info("Good job! You did well! 👍")
+            st.success("Luar biasa! kamu menjawab semua pertanyaan dengan benar! 🌟🎉")
+        elif score >= len(questions) / 2:
+            st.info("Bagus sekali! kamu menjawab lebih dari setengah pertanyaan dengan benar. Pertahankan! 👍")
         else:
-            st.error("Keep trying! You'll get better next time. 💪")
+            st.warning("Jangan khawatir! Cobalah lagi untuk meningkatkan skor kamu. 💪")

@@ -55,7 +55,7 @@ def main():
 
     selected = option_menu(
         None, 
-        ['Home', 'Classification', 'Quiz', 'About'],
+        ['Home', 'Classification', 'Quiz', 'Tentang'],
         icons=['house', 'search', 'book', 'info-circle'],
         menu_icon='cast', 
         default_index=0, 
