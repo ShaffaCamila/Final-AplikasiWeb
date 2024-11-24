@@ -42,12 +42,6 @@ def quiz():
         },
     ]
 
-    # Initialize session state attributes
-    if "user_answers" not in st.session_state:
-        st.session_state.user_answers = {idx: None for idx in range(len(questions))}
-    if "all_answered" not in st.session_state:
-        st.session_state.all_answered = False
-
     # Function to check if all questions are answered
     def check_all_answered():
         st.session_state.all_answered = all(
