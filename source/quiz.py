@@ -30,10 +30,9 @@ def quiz():
             "answer": "Belalang",
         },
         {
-            "question": "Hewan pada gambar adalah termasuk ....... yaitu hewan pemakan daging",
+            "question": "Hewan pemakan daging termasuk golongan?",
             "options": ["Herbivora", "Karnivora", "Omnivora", "Ovipar", "Ovovivipar"],
             "answer": "Karnivora",
-            "image": "./source/harimau.jpeg",  # Path ke gambar
         },
         {
             "question": "Burung, unggas dan ayam termasuk kelompok hewan?",
@@ -42,11 +41,14 @@ def quiz():
         },
     ]
 
+    # Store user answers
+    user_answers = {}
+    all_answered = False
+
     # Function to check if all questions are answered
     def check_all_answered():
-        st.session_state.all_answered = all(
-            answer is not None for answer in st.session_state.user_answers.values()
-        )
+        nonlocal all_answered
+        all_answered = all(answer is not None for answer in user_answers.values())
 
     # Display each question in a card-like layout
     for idx, q in enumerate(questions):
@@ -61,13 +63,8 @@ def quiz():
                 unsafe_allow_html=True,
             )
 
-            # Display the image if the question has one
-            if "image" in q:
-                st.image(q["image"], width=300,)  # Sesuaikan nilai width (contoh: 400 piksel)
-
-
-            # Tombol Radio untuk Jawaban
-            st.session_state.user_answers[idx] = st.radio(
+            # Radio buttons for answers
+            user_answers[idx] = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
                 options=q["options"],
                 key=f"pertanyaan_{idx}",
@@ -75,12 +72,12 @@ def quiz():
             )
 
     # Disable the submit button until all questions are answered
-    submit_button = st.button("Submit", disabled=not st.session_state.all_answered)
+    submit_button = st.button("Submit", disabled=not all_answered)
 
     if submit_button:
         # Calculate score
         score = sum(
-            st.session_state.user_answers[idx] == q["answer"]
+            user_answers[idx] == q["answer"]
             for idx, q in enumerate(questions)
         )
 
