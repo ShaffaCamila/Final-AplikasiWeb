@@ -1,5 +1,4 @@
 import streamlit as st
-import random
 
 def quiz():
     # Header
@@ -42,15 +41,10 @@ def quiz():
             "answer": "Aves",
         },
     ]
-    
-    # Randomize the order of questions once
-    if "shuffled_questions" not in st.session_state:
-        random.shuffle(questions)
-        st.session_state.shuffled_questions = questions
 
     # Initialize session state attributes
     if "user_answers" not in st.session_state:
-        st.session_state.user_answers = {idx: None for idx in range(len(st.session_state.shuffled_questions))}
+        st.session_state.user_answers = {idx: None for idx in range(len(questions))}
     if "all_answered" not in st.session_state:
         st.session_state.all_answered = False
 
@@ -61,7 +55,7 @@ def quiz():
         )
 
     # Display each question in a card-like layout
-    for idx, q in enumerate(st.session_state.shuffled_questions):
+    for idx, q in enumerate(questions):
         with st.container():
             st.markdown(
                 f"""
@@ -77,7 +71,8 @@ def quiz():
             if "image" in q:
                 st.image(q["image"], width=300,)  # Sesuaikan nilai width (contoh: 400 piksel)
 
-            # Radio buttons for answers
+
+            # Tombol Radio untuk Jawaban
             st.session_state.user_answers[idx] = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
                 options=q["options"],
@@ -92,7 +87,7 @@ def quiz():
         # Calculate score
         score = sum(
             st.session_state.user_answers[idx] == q["answer"]
-            for idx, q in enumerate(st.session_state.shuffled_questions)
+            for idx, q in enumerate(questions)
         )
 
         # Tampilkan hasil
@@ -100,7 +95,7 @@ def quiz():
             f"""
             <div style='background-color: #C6E7FF; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid #AED4FF;'>
                 <h2 style='text-align: center;'>Hasil kuis</h2>
-                <p style='text-align: center; font-size: 20px;'>🎉 Kamu mendapatkan skor <strong>{score}</strong> dari <strong>{len(st.session_state.shuffled_questions)}</strong>.</p>
+                <p style='text-align: center; font-size: 20px;'>🎉 Kamu mendapatkan skor <strong>{score}</strong> dari <strong>{len(questions)}</strong>.</p>
             </div>
             """,
             unsafe_allow_html=True,
@@ -108,9 +103,9 @@ def quiz():
         st.markdown("\n")
         
         # Umpan balik berdasarkan skor
-        if score == len(st.session_state.shuffled_questions):
+        if score == len(questions):
             st.success("Luar biasa! kamu menjawab semua pertanyaan dengan benar! 🌟🎉")
-        elif score >= len(st.session_state.shuffled_questions) / 2:
+        elif score >= len(questions) / 2:
             st.info("Bagus sekali! kamu menjawab lebih dari setengah pertanyaan dengan benar. Pertahankan! 👍")
         else:
             st.warning("Jangan khawatir! Cobalah lagi untuk meningkatkan skor kamu. 💪")
