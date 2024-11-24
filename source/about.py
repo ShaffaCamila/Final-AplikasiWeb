@@ -42,7 +42,7 @@ def about():
     # Pembuat
     st.markdown(
         """
-        ### 👩‍💻 Pembuat
+        ### 👩‍💻 Developer
         Aplikasi ini dikembangkan oleh individu yang berdedikasi pada teknologi dan edukasi. Berikut adalah informasi pengembang:
         """
     )
@@ -67,6 +67,7 @@ def about():
             - **Nama**: Naia Shaffa Camila  
             - **Email**: naiashaffa.2022@student.uny.ac.id 
             - **Versi**: 0.8
+            - **GitHub**: https://github.com/ShaffaCamila
             - **Dosen Pembimbing**: Akhsin Nurlayli, S.Pd., M.Eng.  
             Saya berharap aplikasi ini bermanfaat bagi banyak orang. Terima kasih telah menggunakan aplikasi ini!
             """
