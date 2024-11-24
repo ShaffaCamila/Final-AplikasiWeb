@@ -12,7 +12,7 @@ def quiz():
     # Questions and options
     questions = [
         {
-            "question": "Kucing, harimau dan kelinci termasuk kelompok hewan?",
+            "question": "Hewan-hewan dibawah ini termasuk kelompok hewan?",
             "options": ["Pisces", "Ampibi", "Reptil", "Aves", "Mamalia"],
             "answer": "Mamalia",
         },
@@ -63,23 +63,23 @@ def quiz():
                 unsafe_allow_html=True,
             )
 
-            # Add an empty option at the beginning of the list
-            options_with_empty = ["(Pilih jawaban)"] + q["options"]
+            # Add image below Question 1
+            if idx == 0:
+                st.image("./source/gambar-soal.jpg", caption="Ilustrasi untuk pertanyaan 1", use_column_width=True)
+
+            # Get saved answer if exists, otherwise set to None
             default_answer = st.session_state.user_answers.get(idx, None)
 
             # Radio buttons for answers
             selected_answer = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
-                options=options_with_empty,
-                index=0 if default_answer is None else options_with_empty.index(default_answer),
+                options=q["options"],
+                index=q["options"].index(default_answer) if default_answer else None,
                 key=f"radio_{idx}",
             )
 
-            # Save the selected answer in session state, but ignore the empty option
-            if selected_answer != "(Pilih jawaban)":
-                st.session_state.user_answers[idx] = selected_answer
-            else:
-                st.session_state.user_answers[idx] = None
+            # Save the selected answer in session state
+            st.session_state.user_answers[idx] = selected_answer
 
         # Submit button
         submit_button = st.form_submit_button("Submit")
@@ -93,7 +93,6 @@ def quiz():
         score = sum(
             st.session_state.user_answers[idx] == q["answer"]
             for idx, q in enumerate(questions)
-            if st.session_state.user_answers[idx] is not None
         )
 
         st.markdown(
