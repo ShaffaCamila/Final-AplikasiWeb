@@ -27,9 +27,9 @@ def quiz():
             "answer": "Belalang",
         },
         {
-            "question": "Hewan pemakan daging termasuk golongan?",
-            "options": ["Herbivora", "Karnivora", "Omnivora", "Ovipar", "Ovovivipar"],
-            "answer": "Karnivora",
+            "question": "Hewan pemakan rumput termasuk golongan?",
+            "options": ["Karnivora", "Herbivora", "Omnivora", "Ovipar", "Ovovivipar"],
+            "answer": "Herbivora",
         },
         {
             "question": "Burung, unggas dan ayam termasuk kelompok hewan?",
@@ -63,19 +63,23 @@ def quiz():
                 unsafe_allow_html=True,
             )
 
-            # Get saved answer if exists, otherwise use the first option as default
-            default_answer = st.session_state.user_answers.get(idx, q["options"][0])
+            # Add an empty option at the beginning of the list
+            options_with_empty = ["(Pilih jawaban)"] + q["options"]
+            default_answer = st.session_state.user_answers.get(idx, None)
 
             # Radio buttons for answers
             selected_answer = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
-                options=q["options"],
-                index=q["options"].index(default_answer),
+                options=options_with_empty,
+                index=0 if default_answer is None else options_with_empty.index(default_answer),
                 key=f"radio_{idx}",
             )
 
-            # Save the selected answer in session state
-            st.session_state.user_answers[idx] = selected_answer
+            # Save the selected answer in session state, but ignore the empty option
+            if selected_answer != "(Pilih jawaban)":
+                st.session_state.user_answers[idx] = selected_answer
+            else:
+                st.session_state.user_answers[idx] = None
 
         # Submit button
         submit_button = st.form_submit_button("Submit")
@@ -89,6 +93,7 @@ def quiz():
         score = sum(
             st.session_state.user_answers[idx] == q["answer"]
             for idx, q in enumerate(questions)
+            if st.session_state.user_answers[idx] is not None
         )
 
         st.markdown(
