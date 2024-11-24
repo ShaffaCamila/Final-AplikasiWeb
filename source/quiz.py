@@ -41,14 +41,16 @@ def quiz():
         },
     ]
 
-    # Store user answers
-    user_answers = {}
-    all_answered = False
+    # Store user answers in session state to persist across reruns
+    if 'user_answers' not in st.session_state:
+        st.session_state.user_answers = {}
+
+    if 'all_answered' not in st.session_state:
+        st.session_state.all_answered = False
 
     # Function to check if all questions are answered
     def check_all_answered():
-        nonlocal all_answered
-        all_answered = all(answer is not None for answer in user_answers.values())
+        st.session_state.all_answered = all(answer is not None for answer in st.session_state.user_answers.values())
 
     # Display each question in a card-like layout
     for idx, q in enumerate(questions):
@@ -63,21 +65,25 @@ def quiz():
                 unsafe_allow_html=True,
             )
 
-            # Radio buttons for answers
-            user_answers[idx] = st.radio(
+            # Radio buttons for answers, preserving state with session_state
+            selected_answer = st.radio(
                 f"Pilih jawaban untuk Pertanyaan {idx + 1}",
                 options=q["options"],
+                index=q["options"].index(st.session_state.user_answers.get(idx, None)) if idx in st.session_state.user_answers else None,
                 key=f"pertanyaan_{idx}",
                 on_change=check_all_answered,
             )
 
+            # Save the selected answer in session state
+            st.session_state.user_answers[idx] = selected_answer
+
     # Disable the submit button until all questions are answered
-    submit_button = st.button("Submit", disabled=not all_answered)
+    submit_button = st.button("Submit", disabled=not st.session_state.all_answered)
 
     if submit_button:
         # Calculate score
         score = sum(
-            user_answers[idx] == q["answer"]
+            st.session_state.user_answers[idx] == q["answer"]
             for idx, q in enumerate(questions)
         )
 
