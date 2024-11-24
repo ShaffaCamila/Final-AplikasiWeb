@@ -50,7 +50,7 @@ def solution(animal_name):
     def bee():
         st.subheader("Bee || Lebah")
         st.markdown("""
-        **Kelas:** Invertebrata   
+        **Kelas:** Insecta   
         **Ciri-ciri:**  
         - Tubuh bersegmen dengan sayap transparan.
         - Hidup dalam koloni dengan hierarki sosial (ratu, pekerja, prajurit).
@@ -62,7 +62,7 @@ def solution(animal_name):
     def beetle():
         st.subheader("Beetle || Kumbang")
         st.markdown("""
-        **Kelas:** Invertebrata   
+        **Kelas:** Insecta   
         **Ciri-ciri:**  
         - Memiliki tubuh keras dengan eksoskeleton.
         - Sayap depan keras (elytra) melindungi sayap belakang.       
@@ -92,7 +92,7 @@ def solution(animal_name):
     def butterfly():
         st.subheader("Butterfly || Kupu-Kupu ")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Tubuh ringan dengan sayap berwarna-warni.
         - Mengalami metamorfosis dari ulat menjadi kupu-kupu.       
@@ -112,7 +112,7 @@ def solution(animal_name):
     def caterpillar():
         st.subheader("Caterpillar || Ulat ")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Tubuh berbentuk silindris dan lunak.
         - Memiliki kaki semu untuk bergerak.       
@@ -132,7 +132,7 @@ def solution(animal_name):
     def cockroach ():
         st.subheader("cockroach  || Kecoak")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Tubuh pipih dengan antena panjang.
         - Sangat adaptif terhadap lingkungan.       
@@ -222,7 +222,7 @@ def solution(animal_name):
     def dragonfly():
         st.subheader("Dragonfly || Capung")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Sayap transparan dan tubuh panjang.
         - Predator yang memakan serangga kecil.       
@@ -272,7 +272,7 @@ def solution(animal_name):
     def fly():
         st.subheader("Fly || Lalat")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Tubuh kecil dengan sayap transparan.
         - Hidup pendek, biasanya hanya beberapa minggu.       
@@ -423,7 +423,7 @@ def solution(animal_name):
     def jellyfish():
         st.subheader("Jellyfish || Ubur-Ubur")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Invertebrata     
         **Ciri-ciri:**  
         - Tubuh transparan tanpa tulang.
         - Hidup di laut.       
@@ -453,7 +453,7 @@ def solution(animal_name):
     def ladybugs():
         st.subheader("Ladybugs || Kepik")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Tubuh kecil, biasanya berwarna merah dengan bintik hitam.
         - Predator serangga kecil seperti kutu daun.       
@@ -503,7 +503,7 @@ def solution(animal_name):
     def mosquito():
         st.subheader("Mosquito || Nyamuk")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Tubuh kecil dengan proboscis untuk menghisap darah
         - Menularkan penyakit seperti malaria atau demam berdarah.       
@@ -513,7 +513,7 @@ def solution(animal_name):
     def moth():
         st.subheader("Moth || Ngengat")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Aktif di malam hari (nokturnal).
         - Sayap besar, sering kali bercorak menarik.       
@@ -533,7 +533,7 @@ def solution(animal_name):
     def octopus():
         st.subheader("Octopus || Gurita")
         st.markdown("""
-        **Kelas:** Invertebrata    
+        **Kelas:** Insecta    
         **Ciri-ciri:**  
         - Memiliki delapan lengan dengan cawan hisap.
         - Sangat cerdas, mampu memecahkan teka-teki sederhana.       
@@ -813,7 +813,7 @@ def solution(animal_name):
     def starfish():
         st.subheader("Starfish || Bintang Laut")
         st.markdown("""
-        **Kelas:** Invertebrata   
+        **Kelas:** Invertebrata    
         **Ciri-ciri:**  
         - Hidup di dasar laut.
         - Tubuh berbentuk bintang dengan lima lengan atau lebih.       

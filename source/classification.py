@@ -63,7 +63,7 @@ def show_animal_dashboard():
 
             # Handle different confidence levels
             if confidence < 30.0:
-                st.warning(
+                st.error(
                     "⚠ **Skor kepercayaan terlalu rendah** (kurang dari 30%). Belum ada data klasifikasi yang akurat untuk gambar ini. "
                     "Silakan coba dengan gambar lain."
                 )

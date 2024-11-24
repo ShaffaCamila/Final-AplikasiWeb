@@ -55,7 +55,7 @@ def main():
 
     selected = option_menu(
         None, 
-        ['Home', 'Klasifikasi', 'Kuis', 'Tentang'],
+        ['Home', 'Classification', 'Quiz', 'About'],
         icons=['house', 'search', 'book', 'info-circle'],
         menu_icon='cast', 
         default_index=0, 
@@ -70,11 +70,11 @@ def main():
 
     if selected == 'Home':
         home()
-    elif selected == 'Klasifikasi':
+    elif selected == 'Classification':
         show_animal_dashboard()
-    elif selected == 'Kuis':
+    elif selected == 'Quiz':
         quiz()
-    elif selected == 'Tentang':
+    elif selected == 'About':
         tentang()
 
 if __name__ == "__main__":
