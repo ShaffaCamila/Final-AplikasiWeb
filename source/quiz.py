@@ -6,7 +6,7 @@ def quiz():
     st.markdown(
         """
         <div style='background-color: #F0F8FF; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #ADD8E6;'>
-            <h1 style='text-align: center;'>🎉 Quiz Time! 🎉</h1>
+            <h3 style='text-align: center;'>🎉 Quiz Time! 🎉</h3>
             <p style='text-align: center;'>Uji kemampuan kamu!</p>
         </div>
         """,
@@ -64,7 +64,7 @@ def quiz():
             st.markdown(
                 f"""
                 <div style="background-color: #D1E9F6; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #AED4FF;">
-                    <h3>Question {idx + 1}</h3>
+                    <h4>Question {idx + 1}</h4>
                     <p>{q['question']}</p>
                 </div>
                 """,

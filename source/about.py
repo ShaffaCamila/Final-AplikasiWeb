@@ -10,7 +10,7 @@ def tentang():
     st.markdown(
         """
         <div style='background-color: #F0F8FF; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #ADD8E6;'>
-            <h1 style='text-align: center;'>✨ Tentang Aplikasi ✨</h1>
+            <h3 style='text-align: center;'>✨ Tentang Aplikasi ✨</h3>
         </div>
         """,
         unsafe_allow_html=True,

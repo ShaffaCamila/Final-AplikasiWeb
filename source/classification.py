@@ -30,18 +30,16 @@ def show_animal_dashboard():
         return np.expand_dims(image, axis=0)  # Add batch dimension
 
     # Title and description
-    st.title("🐾 Animal Classifier Dashboard")
+    # st.title("🐾 Animal Classifier Dashboard")
     st.markdown(
         """
-        <div style="text-align: center;">
-            <h3>🌟 Klasifikasi Hewan Menggunakan CNN 🌟</h3>
-            <p>Unggah gambar hewan untuk mendapatkan prediksi jenis hewan, informasi,beserta skor kepercayaan.</p>
+        <div style='background-color: #F0F8FF; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #ADD8E6;'>
+            <h3 style='text-align: center;'>🌟 Klasifikasi Hewan Menggunakan CNN 🌟</h3>
+            <p style='text-align: center;'>Unggah gambar hewan untuk mendapatkan prediksi jenis hewan, informasi, dan Confidence score.</p>
         </div>
         """,
-        unsafe_allow_html=True
+        unsafe_allow_html=True,
     )
-
-    treshold = 0.3
     
     # Upload image
     uploaded_file = st.file_uploader("Pilih file gambar hewan:", type=["jpg", "png", "jpeg"])
@@ -64,7 +62,7 @@ def show_animal_dashboard():
             # Handle different confidence levels
             if confidence < 30.0:
                 st.error(
-                    "⚠ **Skor kepercayaan terlalu rendah** (kurang dari 30%). Belum ada data klasifikasi yang akurat untuk gambar ini. "
+                    "⚠ **Confidence score terlalu rendah** (kurang dari 30%). Belum ada data klasifikasi yang akurat untuk gambar ini. "
                     "Silakan coba dengan gambar lain."
                 )
             elif confidence < 70.0:
@@ -72,21 +70,21 @@ def show_animal_dashboard():
                     f"""
                     <div style="border: 3px solid #FFD700; padding: 15px; border-radius: 10px; background-color: #FFF8DC;">
                         <h4>🔍 Prediksi Hewan: <strong>{predicted_animal.capitalize()}</strong></h4>
-                        <p>Skor Kepercayaan: {confidence:.2f}%</p>
+                        <p>Confidence score: {confidence:.2f}%</p>
                     </div>
                     <br>
                     """,
                     unsafe_allow_html=True
                 )
                 st.warning(
-                    "⚠ Skor kepercayaan rendah (30% ≤ confidence < 70%). Hasil mungkin tidak akurat. Silakan unggah gambar yang lebih jelas."
+                    "⚠ Confidence score rendah (30% ≤ confidence < 70%). Hasil mungkin tidak akurat. Silakan unggah gambar yang lebih jelas."
                 )
             else:
                 st.markdown(
                     f"""
                     <div style="border: 3px solid #AED4FF; padding: 15px; border-radius: 10px; background-color: #C6E7FF;">
                         <h4>🔍 Prediksi Hewan: <strong>{predicted_animal.capitalize()}</strong></h4>
-                        <p>Skor Kepercayaan: {confidence:.2f}%</p>
+                        <p>Confidence score: {confidence:.2f}%</p>
                     </div>
                     """,
                     unsafe_allow_html=True
