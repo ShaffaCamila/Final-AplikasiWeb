@@ -22,7 +22,7 @@ def home():
 
     # Interactive Section 1: Home
     # with st.expander("1. Home"):
-    #     st.markdown("This is the main page where you can explore general information about the app.")
+    #     st.markdown("This is the main page where you can explore general information about the app.") /
 
     # Bagian Interaktif 2: Classification
     with st.expander("2. Classification"):
