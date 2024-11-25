@@ -18,7 +18,7 @@ def home():
     st.markdown("---")
 
     # Interactive Guide Section
-    st.markdown("### 📋 Lihat Apa yang Bisa kamu Lakukan di Sini!")
+    st.markdown("### 📋 Lihat Apa yang Bisa Kamu Lakukan di Sini!")
 
     # Interactive Section 1: Home
     # with st.expander("1. Home"):
@@ -153,6 +153,7 @@ def home():
         7. Tubuh ditutupi sisik dari keratin sehingga kedap air dan mencegah dehidrasi.
         8. Memiliki 4 kaki untuk melata, kecuali ular.
         9. Alat pencernaan lengkap.
+        10. Memiliki gigi dan lidah.
         """)
 
     # Penjelasan Mammalia
